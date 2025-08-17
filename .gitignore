@@ -1,0 +1,55 @@
+# Advanced News Classifier
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Build
+target/
+*.class
+*.jar
+!lib/*.jar
+
+# Dependencies  
+.m2/
+dependency-reduced-pom.xml
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Java
+*.ctxt
+*.serialized
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Test outputs
+TEST-*.xml
+
+# DL4J model files
+*.zip
+*.model
+
+# Resources (keep structure but ignore large files)
+src/main/resources/*.csv
+src/main/resources/*.txt
+!src/main/resources/glove.6B.50d_Reduced.csv
+
+# Assignment artifacts
+*.pdf
+*feedback.html
+Assignment_*
