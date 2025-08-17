@@ -18,12 +18,14 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AdvancedNewsClassifier {
     private Toolkit toolkit = null;
     private static List<NewsArticles> newsArticles = null;
-    private static List<Glove> gloveEmbeddings = null;
+    private static Map<String, Glove> gloveMap = null;
     private List<ArticlesEmbedding> articleEmbeddings = null;
     private MultiLayerNetwork neuralNetwork = null;
 
@@ -36,7 +38,7 @@ public class AdvancedNewsClassifier {
         toolkit = new Toolkit();
         toolkit.loadGlove();
         newsArticles = toolkit.loadNews();
-        gloveEmbeddings = createGloveList();
+        createGloveMap();
         articleEmbeddings = loadData();
     }
 
@@ -68,6 +70,24 @@ public class AdvancedNewsClassifier {
         return listResult;
     }
 
+    private void createGloveMap() {
+        gloveMap = new HashMap<>();
+        List<String> listVocabulary = Toolkit.getListVocabulary();
+        List<double[]> listVectors = Toolkit.getlistVectors();
+        for (int i = 0; i < listVocabulary.size(); i++) {
+            String word = listVocabulary.get(i);
+            if (!ArticlesEmbedding.isStopWord(word, Toolkit.STOPWORDS)) {
+                double[] vectorArray = listVectors.get(i);
+                Vector vector = new Vector(vectorArray);
+                Glove glove = new Glove(word, vector);
+                gloveMap.put(word.toLowerCase(), glove);
+            }
+        }
+    }
+
+    public static Glove getGloveByWord(String word) {
+        return gloveMap.get(word.toLowerCase());
+    }
 
     public static List<ArticlesEmbedding> loadData() {
         List<ArticlesEmbedding> listEmbedding = new ArrayList<>();
@@ -103,12 +123,7 @@ public class AdvancedNewsClassifier {
         return intMedian;
     }
     private static boolean isWordInGloveList(String word) {
-        for (Glove glove : gloveEmbeddings) {
-            if (glove.getVocabulary().equalsIgnoreCase(word)) {
-                return true;
-            }
-        }
-        return false;
+        return gloveMap.containsKey(word.toLowerCase());
     }
 
 
@@ -239,8 +254,8 @@ public class AdvancedNewsClassifier {
         groupedResults.add(newGroup);
     }
 
-    public static List<Glove> getGloveEmbeddings() {
-        return gloveEmbeddings;
+    public static Map<String, Glove> getGloveMap() {
+        return gloveMap;
     }
 
     public List<ArticlesEmbedding> getArticleEmbeddings() {

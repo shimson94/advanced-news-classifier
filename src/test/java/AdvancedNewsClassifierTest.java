@@ -17,11 +17,9 @@ public class AdvancedNewsClassifierTest {
     private final PrintStream originalErr = System.err;
 
     @Test
-    void createGloveList() throws IOException {
+    void createGloveMap() throws IOException {
         AdvancedNewsClassifier classifier = new AdvancedNewsClassifier();
-        List<Glove> gloveList = classifier.createGloveList();
-
-        assertEquals(38515, gloveList.size());
+        assertEquals(38515, AdvancedNewsClassifier.getGloveMap().size());
     }
 
     @Test
@@ -129,11 +127,8 @@ public class AdvancedNewsClassifierTest {
                 String[] words = article.getNewsContent().split("\\s+");
                 totalWords += words.length;
                 for (String word : words) {
-                    for (Glove glove : AdvancedNewsClassifier.getGloveEmbeddings()) {
-                        if (glove.getVocabulary().equalsIgnoreCase(word)) {
-                            embeddedWords++;
-                            break;
-                        }
+                    if (AdvancedNewsClassifier.getGloveByWord(word) != null) {
+                        embeddedWords++;
                     }
                 }
             }
@@ -149,7 +144,7 @@ public class AdvancedNewsClassifierTest {
         // Calculate metrics
         double vocabularyCoverage = totalWords > 0 ? (double) embeddedWords / totalWords * 100 : 0;
         double accuracy = accuracyTest ? 100.0 : 0.0; // Simplified for this implementation
-        int vocabularySize = AdvancedNewsClassifier.getGloveEmbeddings().size();
+        int vocabularySize = AdvancedNewsClassifier.getGloveMap().size();
         
         // Report comprehensive metrics
         System.out.printf("[BENCHMARK] Classification Accuracy: %.1f%% (%d test articles)%n", accuracy, testArticles);

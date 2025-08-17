@@ -33,8 +33,8 @@ public class Toolkit {
                 }
                 listVectors.add(tempArray);
             }
-        } catch(Exception Exception){
-            System.out.println(Exception.getMessage());
+        } catch(Exception e){
+            throw new IOException("Failed to load GloVe file: " + e.getMessage(), e);
         }
     }
 

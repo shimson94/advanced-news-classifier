@@ -68,7 +68,7 @@ public class ArticlesEmbedding extends NewsArticles {
                     intSize = getEmbeddingSize();
                     processedText = getNewsContent();
                     String[] words = processedText.split("\\s+");
-                    int vectorLength = AdvancedNewsClassifier.getGloveEmbeddings().get(0).getVector().getVectorSize();
+                    int vectorLength = AdvancedNewsClassifier.getGloveMap().values().iterator().next().getVector().getVectorSize();
                     newsEmbedding = Nd4j.create(intSize, vectorLength);
 
                     int rowCount = 0;
@@ -88,12 +88,7 @@ public class ArticlesEmbedding extends NewsArticles {
 
     }
     private Glove findGloveWord(String word) {
-        for (Glove glove : AdvancedNewsClassifier.getGloveEmbeddings()) {
-            if (glove.getVocabulary().equalsIgnoreCase(word)) {
-                return glove;
-            }
-        }
-        return null;
+        return AdvancedNewsClassifier.getGloveByWord(word);
     }
 
     /***
