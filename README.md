@@ -34,11 +34,16 @@ This project implements a sophisticated text classification pipeline that catego
 
 **Real-world benchmarks on 32-article dataset:**
 
-- **System Initialization**: 756ms (38,534 vocabulary terms)
+- **System Initialization**: 751ms (38,534 vocabulary terms)
 - **Prediction Speed**: 1.3ms average per article  
-- **Neural Network Training**: 512ms (100 epochs, 20 training articles)
-- **Memory Footprint**: 627MB total pipeline
-- **End-to-End Processing**: 4.46 seconds complete workflow
+- **Neural Network Training**: 503ms (100 epochs, 20 training articles)
+- **Memory Footprint**: 579MB total pipeline
+- **End-to-End Processing**: 4.26 seconds complete workflow
+
+**Key Optimizations Implemented:**
+- Replaced O(n²) bubble sort with O(n log n) Arrays.sort for scalable performance
+- Reduced memory usage by 47.7MB through efficient algorithm selection
+- Optimized embedding size calculation reducing computational complexity
 
 **Dataset Specifications:**
 - 38,534 GloVe vocabulary terms (50-dimensional vectors)

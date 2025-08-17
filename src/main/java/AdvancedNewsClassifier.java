@@ -17,6 +17,7 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AdvancedNewsClassifier {
@@ -90,7 +91,8 @@ public class AdvancedNewsClassifier {
             }
             docLengths[i] = count;
         }
-        int[] sortedList = bubbleSort(docLengths);
+        int[] sortedList = docLengths.clone();
+        Arrays.sort(sortedList);
         int n = sortedList.length;
         if (n % 2 == 0) {
             intMedian = (sortedList[n / 2] + sortedList[(n / 2) + 1]) / 2;
@@ -109,24 +111,6 @@ public class AdvancedNewsClassifier {
         return false;
     }
 
-    public int[] bubbleSort(int[] arr){
-        boolean swap;
-        for (int i = 0; i < arr.length; i++) {
-            swap = false;
-            for (int j = 0; j < arr.length - i - 1; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                    swap = true;
-                }
-            }
-            if (!swap) {
-                break;
-            }
-        }
-        return arr;
-    }
 
     public void populateEmbedding() {
         for (int i = 0; i < articleEmbeddings.size(); i++){
