@@ -46,8 +46,10 @@ public class ArticlesEmbeddingTest {
             totalTime += stopWatch.getNanoTime();
             stopWatch.reset();
         }
-        System.out.println("Average execution time: " + (totalTime / 100));
-        assertTrue(totalTime / 100 < 13000000);
+        long avgTimeNanos = totalTime / 100;
+        double avgTimeMs = avgTimeNanos / 1_000_000.0;
+        System.out.printf("[BENCHMARK] Text Processing: %.2fms average per document%n", avgTimeMs);
+        assertTrue(avgTimeNanos < 13000000);
     }
 
     @Test
@@ -77,7 +79,8 @@ public class ArticlesEmbeddingTest {
             totalTime += stopWatch.getTime();
             stopWatch.reset();
         }
-        System.out.println("Average execution time: " + (totalTime / 50));
-        assertTrue(totalTime / 50 < 8);
+        long avgTime = totalTime / 50;
+        System.out.printf("[BENCHMARK] Embedding Generation: %dms average per document%n", avgTime);
+        assertTrue(avgTime < 8);
     }
 }

@@ -45,8 +45,10 @@ class ToolkitTest {
             stopWatch.reset();
         }
 
-        System.out.println("Average execution time: " + (totalTime / 20));
-        assertTrue(totalTime / 20 < 280);
+        long avgTime = totalTime / 20;
+        int vocabularySize = Toolkit.getListVocabulary().size();
+        System.out.printf("[BENCHMARK] GloVe Loading: %dms average (%,d vocabulary terms)%n", avgTime, vocabularySize);
+        assertTrue(avgTime < 280);
     }
 
     @Test
@@ -69,8 +71,10 @@ class ToolkitTest {
             stopWatch.reset();
         }
 
-        System.out.println("Average execution time: " + (totalTime / 50));
-        assertTrue(totalTime / 50 < 30);
+        long avgTime = totalTime / 50;
+        int articleCount = newsList.size();
+        System.out.printf("[BENCHMARK] News Loading: %dms average (%d articles)%n", avgTime, articleCount);
+        assertTrue(avgTime < 30);
     }
 
 }

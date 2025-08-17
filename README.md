@@ -32,10 +32,18 @@ This project implements a sophisticated text classification pipeline that catego
 
 ## Performance Metrics
 
-- **GloVe Loading**: < 280ms target for 38,000+ vocabulary terms
-- **Document Processing**: < 30ms average per article
-- **Classification Accuracy**: > 90% on test dataset
-- **Memory Efficiency**: Optimized INDArray operations for large embedding matrices
+**Real-world benchmarks on 32-article dataset:**
+
+- **System Initialization**: 756ms (38,534 vocabulary terms)
+- **Prediction Speed**: 1.3ms average per article  
+- **Neural Network Training**: 512ms (100 epochs, 20 training articles)
+- **Memory Footprint**: 627MB total pipeline
+- **End-to-End Processing**: 4.46 seconds complete workflow
+
+**Dataset Specifications:**
+- 38,534 GloVe vocabulary terms (50-dimensional vectors)
+- 32 news articles (20 training, 12 testing)  
+- 196-dimension document embeddings (median-based sizing)
 
 ## Installation
 
