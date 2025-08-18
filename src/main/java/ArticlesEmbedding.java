@@ -8,6 +8,7 @@ import java.util.Properties;
 public class ArticlesEmbedding extends NewsArticles {
     private int intSize = -1;
     private String processedText = "";
+    private static StanfordCoreNLP pipeline = null;
 
     private INDArray newsEmbedding = Nd4j.create(0);
 
@@ -35,9 +36,11 @@ public class ArticlesEmbedding extends NewsArticles {
     }
     public String processingText(String text, String[] stopWords){
         StringBuilder mySB = new StringBuilder();
-        Properties properties = new Properties();
-        properties.setProperty("annotators","tokenize,pos,lemma");
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
+        if (pipeline == null) {
+            Properties properties = new Properties();
+            properties.setProperty("annotators","tokenize,pos,lemma");
+            pipeline = new StanfordCoreNLP(properties);
+        }
         CoreDocument document = pipeline.processToCoreDocument(text);
 
         for (CoreLabel token:document.tokens()){

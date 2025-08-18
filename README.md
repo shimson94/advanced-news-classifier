@@ -43,6 +43,7 @@ This project implements a sophisticated text classification pipeline that catego
 **Key Optimizations Implemented:**
 - **HashMap Word Lookup**: Replaced O(n) linear search with O(1) HashMap access (99.997% reduction in lookup operations)
 - **Bubble Sort Elimination**: Replaced O(n²) bubble sort with O(n log n) Arrays.sort for scalable performance
+- **Stanford CoreNLP Pipeline Optimization**: Implemented static singleton pattern eliminating redundant NLP pipeline instantiation, resolving production timeout failures
 - **Memory Optimization**: Eliminated redundant data structures reducing memory footprint
 - **Algorithm Complexity Reduction**: Optimized embedding size calculation and word lookup patterns
 
