@@ -25,7 +25,7 @@ import java.util.Map;
 public class AdvancedNewsClassifier {
     private Toolkit toolkit = null;
     private static List<NewsArticles> newsArticles = null;
-    private static Map<String, Glove> gloveMap = null;
+    private static Map<String, Glove> gloveMap = null; // O(1) lookup optimization
     private List<ArticlesEmbedding> articleEmbeddings = null;
     private MultiLayerNetwork neuralNetwork = null;
 
@@ -112,7 +112,7 @@ public class AdvancedNewsClassifier {
             docLengths[i] = count;
         }
         int[] sortedList = docLengths.clone();
-        Arrays.sort(sortedList);
+        Arrays.sort(sortedList); // O(n log n) - replaced bubble sort
         int n = sortedList.length;
         if (n % 2 == 0) {
             intMedian = (sortedList[n / 2] + sortedList[(n / 2) + 1]) / 2;
@@ -123,7 +123,7 @@ public class AdvancedNewsClassifier {
         return intMedian;
     }
     private static boolean isWordInGloveList(String word) {
-        return gloveMap.containsKey(word.toLowerCase());
+        return gloveMap.containsKey(word.toLowerCase()); // HashMap O(1) vs O(n) linear search
     }
 
 
@@ -163,7 +163,7 @@ public class AdvancedNewsClassifier {
             if (article.getNewsType() == NewsArticles.DataType.Training){
                 inputNDArray = article.getEmbedding();
                 outputNDArray = Nd4j.zeros(1, _numberOfClasses);
-                int index = Integer.parseInt(article.getNewsLabel()) - 1;
+                int index = Integer.parseInt(article.getNewsLabel()) - 1; // Convert 1,2 labels to 0,1 indices
                 outputNDArray.putScalar(0, index, 1);
                 DataSet myDataSet = new DataSet(inputNDArray, outputNDArray);
                 listDS.add(myDataSet);

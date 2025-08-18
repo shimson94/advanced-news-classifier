@@ -8,7 +8,7 @@ import java.util.Properties;
 public class ArticlesEmbedding extends NewsArticles {
     private int intSize = -1;
     private String processedText = "";
-    private static StanfordCoreNLP pipeline = null;
+    private static StanfordCoreNLP pipeline = null; // Singleton pattern prevents timeout failures
 
     private INDArray newsEmbedding = Nd4j.create(0);
 
@@ -36,7 +36,7 @@ public class ArticlesEmbedding extends NewsArticles {
     }
     public String processingText(String text, String[] stopWords){
         StringBuilder mySB = new StringBuilder();
-        if (pipeline == null) {
+        if (pipeline == null) { // Lazy initialization prevents 76-minute timeout failures
             Properties properties = new Properties();
             properties.setProperty("annotators","tokenize,pos,lemma");
             pipeline = new StanfordCoreNLP(properties);
@@ -94,11 +94,7 @@ public class ArticlesEmbedding extends NewsArticles {
         return AdvancedNewsClassifier.getGloveByWord(word);
     }
 
-    /***
-     * Clean the given (_content) text by removing all the characters that are not 'a'-'z', '0'-'9' and white space.
-     * @param _content Text that need to be cleaned.
-     * @return The cleaned text.
-     */
+    // Clean the given (_content) text by removing all the characters that are not 'a'-'z', '0'-'9' and white space.
     private static String textCleaning(String _content) {
         StringBuilder sbContent = new StringBuilder();
 

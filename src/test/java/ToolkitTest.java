@@ -34,7 +34,6 @@ class ToolkitTest {
         assertEquals("zymogen", Toolkit.getListVocabulary().get(38533));
         assertEquals("-0.34302,-0.76724,0.13492,-0.00597,0.48681,-0.07070,0.51518,0.87200,0.05105,0.85437,0.78227,0.09527,0.76955,0.98725,-0.67563,0.26199,-0.23906,0.03835,0.28952,0.66234,-0.96697,-1.25970,0.59936,0.82306,-0.68298,0.91953,0.01823,0.16589,0.32776,0.92470,-0.97598,-0.64046,0.09786,-0.23237,0.49565,0.33539,0.18704,0.06581,0.19750,-0.21133,0.44679,-0.19354,-1.86070,0.76211,-0.93576,0.35687,0.26919,0.50355,-0.08195,0.37539", doubleToString(Toolkit.getlistVectors().get(38533)));
 
-        //performance test
         long totalTime = 0;
 
         for (int i = 0; i < 20; i++) {
@@ -60,7 +59,6 @@ class ToolkitTest {
         assertEquals(NewsArticles.DataType.Training, newsList.get(0).getNewsType());
         assertEquals("1", newsList.get(0).getNewsLabel());
 
-        //performance test
         long totalTime = 0;
 
         for (int i = 0; i < 50; i++) {

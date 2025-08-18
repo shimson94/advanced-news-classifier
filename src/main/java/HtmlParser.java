@@ -1,9 +1,6 @@
 public class HtmlParser {
-    /***
-     * Extract the title of the news from the _htmlCode.
-     * @param _htmlCode Contains the full HTML string from a specific news. E.g. 01.htm.
-     * @return Return the title if it's been found. Otherwise, return "Title not found!".
-     */
+
+    // Extract the title of the news from the _htmlCode.
     public static String getNewsTitle(String _htmlCode) {
         String titleTagOpen = "<title>";
         String titleTagClose = "</title>";
@@ -19,11 +16,7 @@ public class HtmlParser {
         return "Title not found!";
     }
 
-    /***
-     * Extract the content of the news from the _htmlCode.
-     * @param _htmlCode Contains the full HTML string from a specific news. E.g. 01.htm.
-     * @return Return the content if it's been found. Otherwise, return "Content not found!".
-     */
+    // Extract the content of the news from the _htmlCode.
     public static String getNewsContent(String _htmlCode) {
         String contentTagOpen = "\"articleBody\": \"";
         String contentTagClose = " \",\"mainEntityOfPage\":";
