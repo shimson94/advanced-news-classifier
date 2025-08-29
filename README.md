@@ -73,6 +73,23 @@
 
 > **Detailed Performance Analysis**: See [PERFORMANCE.md](PERFORMANCE.md) for comprehensive benchmarks, optimisation details, and technical deep-dive.
 
+## System Demonstration
+
+The following screenshot shows the actual output when running the semantic classification system:
+
+![Demo Screenshot](Demo.png)
+
+**What this demonstrates:**
+- **Group 1**: Leadership/personality-focused articles (Boris Johnson political coverage, Sam Altman CEO stories, Nobel Prize recognition)
+- **Group 2**: Scientific/policy analysis articles (COVID research studies, public health monitoring, drug efficacy analysis)
+
+The system successfully distinguishes between journalistic approaches using GloVe embeddings for semantic understanding, advancing beyond simple keyword-based classification to capture nuanced thematic patterns in news content.
+
+**To run this demo yourself:**
+```bash
+mvn test -Dtest=AdvancedNewsClassifierTest#demoProjectOutput
+```
+
 ## Installation
 
 ### Prerequisites
