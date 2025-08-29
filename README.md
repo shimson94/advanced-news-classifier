@@ -51,7 +51,7 @@
 
 ## Performance Highlights
 
-### **⚡ Key Metrics**
+### **Key Metrics**
 - **Prediction Speed**: 1.3ms per article (sub-millisecond processing)
 - **Processing Throughput**: 11.9 articles/sec with 5.6M words/sec analysis
 - **Optimisation Impact**: 99.997% HashMap lookup improvement (O(n) → O(1))
